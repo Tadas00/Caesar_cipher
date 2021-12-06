@@ -8,9 +8,11 @@ namespace Caesar_cipher
         static void Main(string[] args)
         {
             //Starting file
-            string CFr = Environment.CurrentDirectory + "\\App_Data\\InputText.txt";
+            string CFr = Environment.CurrentDirectory;
+            CFr = CFr.Substring(0, CFr.Length-10) + "\\App_Data\\InputText.txt";
 
             string inputText;
+            inputText = InOutUtils.ReadText(CFr);
             try
             {
                 inputText = InOutUtils.ReadText(CFr);

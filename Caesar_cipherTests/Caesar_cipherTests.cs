@@ -167,5 +167,29 @@ namespace Caesar_cipher.Tests
             }
 
         }
+
+        [TestClass()]
+        public class ReadInputTests
+        {
+            [TestMethod()]
+            public void Should_Throw_inputFileNotExists()
+            {
+                Action act = () => InOutUtils.ReadText("");
+
+                act.Should().Throw<Exception>();
+            }
+
+            [TestMethod()]
+            public void Should_NotThrow_InputFileExists()
+            {
+                //Input should be in default place
+                string CFr = Environment.CurrentDirectory;
+                CFr = CFr.Substring(0, CFr.Length - 15) + "\\App_Data\\InputText.txt";
+
+                Action act = () => InOutUtils.ReadText(CFr);
+
+                act.Should().NotThrow();
+            }
+        }
     }
 }
