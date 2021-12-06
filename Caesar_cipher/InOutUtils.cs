@@ -2,7 +2,7 @@
 
 namespace Caesar_cipher
 {
-    class InOutUtils
+    public class InOutUtils
     {
         /// <summary>
         /// Reads input text from a text file

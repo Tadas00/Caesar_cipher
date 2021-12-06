@@ -2,7 +2,7 @@
 
 namespace Caesar_cipher
 {
-    class TaskUtils
+    public class TaskUtils
     {
         /// <summary>
         /// Shifts letters to the left by a specified cipher number
@@ -16,17 +16,18 @@ namespace Caesar_cipher
         /// <returns>Ciphered input text as string</returns>
         public static string Cipher(int cipherNumber, string inputText, int[] Floors, int[] Roofs, int windowCount)
         {
-            char[] inputSymbols = inputText.ToCharArray();
+            char[] Symbols = inputText.ToCharArray();
 
-            for (int i = 0; i < inputSymbols.Length; i++)
+            for (int i = 0; i < Symbols.Length; i++)
             {
-                int asciiCode = (int)inputSymbols[i];
-                for (int windowIndex = 0; windowIndex < windowCount; windowIndex++)
-                    if (asciiCode >= Floors[windowIndex] && asciiCode <= Roofs[windowIndex])
-                        inputSymbols[i] = cipherLetter(asciiCode, Floors[windowIndex], Roofs[windowIndex], cipherNumber);
+                int asciiCode = (int)Symbols[i];
+
+                for (int windowIndex = 0; windowIndex < windowCount; windowIndex++)     //Iterate through every window of symbols (2 windows in default case)
+                    if (asciiCode >= Floors[windowIndex] && asciiCode <= Roofs[windowIndex])    //If letter fits to window
+                        Symbols[i] = cipherLetter(asciiCode, Floors[windowIndex], Roofs[windowIndex], cipherNumber);   //cipher that symbol
             }
 
-            return new string(inputSymbols);
+            return new string(Symbols);
         }
 
         /// <summary>
@@ -37,11 +38,15 @@ namespace Caesar_cipher
         /// <param name="roof">End letter of a window to cipher at</param>
         /// <param name="cipherNumber">Number by which to shift letter to the left</param>
         /// <returns>Ciphered symbol</returns>
-        private static char cipherLetter (int asciiCode, int floor, int roof, int cipherNumber)
+        public static char cipherLetter (int asciiCode, int floor, int roof, int cipherNumber)
         {
-            int cipheredCode = asciiCode - floor - cipherNumber;
-            if (cipheredCode < 0) cipheredCode = (roof - floor + 1) - Math.Abs(cipheredCode) % (roof - floor + 1);
-            return (char)(((cipheredCode) % (roof - floor + 1)) + floor);
+            if (asciiCode < floor || asciiCode > roof) throw new Exception("Symbol is outside window area");
+
+            int cipheredCode = asciiCode - floor - cipherNumber;    //Brings ascii code to the floor (base of 0). Then shifts left (substracts cipher number)
+
+            if (cipheredCode < 0) cipheredCode = (roof - floor + 1) - Math.Abs(cipheredCode) % (roof - floor + 1);  //If, after shifting, ascii code got negative, take it back to interval [0 ; window size]
+
+            return (char)(((cipheredCode) % (roof - floor + 1)) + floor);   //Divide by window size, and whats left is new ascii code. Add floor back to bring ascii code to the start level
         }
 
         /// <summary>
