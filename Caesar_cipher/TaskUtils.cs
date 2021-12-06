@@ -44,9 +44,9 @@ namespace Caesar_cipher
 
             int cipheredCode = asciiCode - floor - cipherNumber;    //Brings ascii code to the floor (base of 0). Then shifts left (substracts cipher number)
 
-            if (cipheredCode < 0) cipheredCode = (roof - floor + 1) - Math.Abs(cipheredCode) % (roof - floor + 1);  //If, after shifting, ascii code got negative, take it back to interval [0 ; window size]
+            if (cipheredCode < 0) cipheredCode = (roof - floor + 1) - Math.Abs(cipheredCode) % (roof - floor + 1);  //If, after shifting, code got negative, take it back to interval [0 ; window size]
 
-            return (char)(((cipheredCode) % (roof - floor + 1)) + floor);   //Divide by window size, and whats left is new ascii code. Add floor back to bring ascii code to the start level
+            return (char)(((cipheredCode) % (roof - floor + 1)) + floor);   //Divide by window size, and whats left is new ascii code. Add floor back to bring ascii code to the start windows of symbols
         }
 
         /// <summary>
