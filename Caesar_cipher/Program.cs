@@ -12,17 +12,13 @@ namespace Caesar_cipher
             CFr = CFr.Substring(0, CFr.Length-10) + "\\App_Data\\InputText.txt";
 
             string inputText;
-            inputText = InOutUtils.ReadText(CFr);
-            try
-            {
-                inputText = InOutUtils.ReadText(CFr);
-            }
-            catch
-            {
+            try { inputText = InOutUtils.ReadText(CFr); }
+            catch {
                 Console.WriteLine("Can't read from input file");
                 return;
             }
-            
+
+            //inputText = "";  //Input text can also be inserted here for testing purposes
 
             //Shift number
             int cipherNumber = 3;
@@ -36,7 +32,12 @@ namespace Caesar_cipher
             //Testing of the program
             string cipheredText;
 
-            Console.WriteLine("Encyphered text: ");
+            Console.WriteLine("Input text: ");
+            Console.WriteLine(inputText);
+
+            Console.WriteLine();
+
+            Console.WriteLine("Encyphered text (by {0}): ", cipherNumber);
             cipheredText = TaskUtils.Cipher(cipherNumber, inputText, Floors, Roofs, windowsCount);
             Console.WriteLine(cipheredText);
 
