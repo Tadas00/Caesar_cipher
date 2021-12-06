@@ -31,6 +31,7 @@ namespace Caesar_cipher
             int[] Roofs = { (int)'z', (int)'Z' };
             int windowsCount = Math.Min(Floors.Length, Roofs.Length);
 
+            //Testing of the program
             string cipheredText;
 
             Console.WriteLine("Encyphered text: ");
